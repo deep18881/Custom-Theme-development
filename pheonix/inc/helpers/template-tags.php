@@ -180,3 +180,44 @@ function pheonix_read_more() {
 		echo $more; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }
+
+
+/**
+ * Displays pagination links with Bootstrap styling.
+ *
+ * This function generates and echoes pagination links with Bootstrap classes.
+ * The generated links are wrapped in a <nav> element with the class "pheonix-pagination".
+ * The function uses the WordPress function `paginate_links` to generate the actual pagination links.
+ *
+ * @return void
+ */
+function pheonix_pagination() {
+	// Generate the pagination links using the WordPress function `paginate_links`.
+	// The generated links are wrapped in a <nav> element with the class "pheonix-pagination".
+	printf(
+		'<nav class="pheonix-pagination clearfix">%s</nav>',
+		// Sanitize the pagination links using the `wp_kses` function.
+		// The allowed HTML tags and attributes are specified in the second parameter.
+		wp_kses(
+			paginate_links(
+				array(
+					// Before each page number, add a <span> element with the class "btn border border-secondary mr-2 mb-2".
+					'before_page_number' => '<span class="btn border border-secondary mr-2 mb-2">',
+					// After each page number, add a closing </span> tag.
+					'after_page_number'  => '</span>',
+				)
+			),
+			array(
+				// Allow the <a> element with the href attribute.
+				'a'    => array(
+					'href' => array(),
+				),
+				// Allow the <span> element with the class attribute.
+				'span' => array(
+					'class' => array(),
+				),
+			)
+		)
+	);
+}
+

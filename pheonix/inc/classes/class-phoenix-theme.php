@@ -33,6 +33,9 @@ class Phoenix_Theme {
 		// Load metabox class.
 		Meta_Box::get_instance();
 
+		// Load sidebar class.
+		Sidebar::get_instance();
+
 		// Setup hooks.
 		$this->setup_hooks();
 	}
@@ -156,7 +159,7 @@ class Phoenix_Theme {
 	 */
 	public function enqueue_scripts() {
 		// Add theme stylesheet.
-		wp_register_script( 'phoenix-script', PHOENIX_DIR_URI . '/assets/js/pheonix.js', array(), filemtime( PHOENIX_DIR_PATH . '/assets/js/phoenix.js' ), true );
+		wp_register_script( 'phoenix-script', PHOENIX_DIR_URI . '/assets/js/phoenix.js', array(), filemtime( PHOENIX_DIR_PATH . '/assets/js/phoenix.js' ), true );
 
 		// register cdn for popper js.
 		wp_register_script( 'popper-js', 'https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js', array(), '2.11.8', true );

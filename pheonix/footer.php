@@ -10,6 +10,9 @@
 </div>
 </div>
 <footer>Footer</footer>
-<?php wp_footer(); ?>
+<?php
+get_sidebar( 'footer' );
+wp_footer();
+?>
 </body>
 </html>

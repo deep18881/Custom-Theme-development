@@ -49,6 +49,10 @@ get_header();
 					}
 					?>
 				</div>
+			
+			<?php
+			pheonix_pagination();
+			?>
 			</div>
 			<?php
 		} else {

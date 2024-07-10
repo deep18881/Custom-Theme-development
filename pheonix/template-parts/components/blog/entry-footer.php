@@ -6,7 +6,7 @@
  */
 
 // Display post categories.
-$categories = wp_get_object_terms( get_the_ID(), array( 'category', 'post_tag' ) );
+$categories = wp_get_post_terms( get_the_ID(), array( 'category', 'post_tag' ) );
 if ( empty( $categories ) || ! is_array( $categories ) ) {
 	return;
 }
