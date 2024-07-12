@@ -1,5 +1,5 @@
 (function ($) {
-    console.log('phoenix.js');
+    console.log('pheonix.js');
     /**
      * Clock Class.
      */

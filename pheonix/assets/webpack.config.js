@@ -1,7 +1,8 @@
 const path = require('path');
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CssMinimizerPlugin = requirecd('css-minimizer-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const JS_DIR = path.resolve(__dirname, 'js');
 const IMG_DIR = path.resolve(__dirname, 'img');
@@ -26,17 +27,17 @@ const rules = [
     {
         test: /\.scss$/,
         exclude: /node_modules/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        use: ['style-loader', 'css-loader', 'sass-loader']
     },
     {
         test: /\.(png|jpg|svg|gif|jpeg|webp|ico|)$/,
-        use: [{
+        use: {
             loader: 'file-loader',
             options: {
                 name: '[name].[ext]',
                 publicPath: 'production' === process.env.NODE_ENV ? '../' : '../../',
             }
-        }]
+        }
     },
 
 ];
@@ -59,12 +60,24 @@ module.exports = (env, argv) => ({
     output: output,
     devtool: 'source-map',
     module: {
-        rules: rules
+        rules: rules,
+    },
+    optimization: {
+        minimizer: [
+            new CssMinimizerPlugin(),
+            new UglifyJsPlugin(
+                {
+                    cache: false,
+                    parallel: true,
+                    sourceMap: false,
+                }
+            )
+        ]
     },
     plugins: plugins(argv),
     externals: {
         jquery: 'jQuery'
     }
-})
+});
 
 
