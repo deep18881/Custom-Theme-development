@@ -1,8 +1,8 @@
 {
-  "name": "phoenix",
+  "name": "pheonix",
   "version": "1.0.0",
-  "description": "Phoenix theme packages",
-  "main": "phoenix.js",
+  "description": "Pheonix theme packages",
+  "main": "main.js",
   "scripts": {
     "prod": "cross-env NODE_ENV=production webpack --mode production --progress",
     "dev": "cross-env NODE_ENV=development webpack --watch --mode development --progress",
@@ -13,7 +13,7 @@
     "themes"
   ],
   "author": "Deep Trivedi",
-  "license": "ISC",
+  "license": "MIT",
   "private": true,
   "browserslist": [
     "defaults"
@@ -26,17 +26,17 @@
     "clean-webpack-plugin": "^4.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^7.1.2",
-    "css-minimizer-webpack-plugin": "^7.0.0",
     "cssnano": "^7.0.4",
     "file-loader": "^6.2.0",
     "mini-css-extract-plugin": "^2.9.0",
     "optimize-css-assets-webpack-plugin": "^6.0.1",
     "style-loader": "^4.0.0",
-    "uglifyjs-webpack-plugin": "^2.2.0",
+    "uglifyjs-webpack-plugin": "^1.1.2",
     "webpack": "^5.93.0",
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "webpack-dev-server": "^5.0.4"
   }
 }

@@ -14,6 +14,29 @@ if ( ! defined( 'PHOENIX_DIR_URI' ) ) {
 	define( 'PHOENIX_DIR_URI', untrailingslashit( get_template_directory_uri() ) );
 }
 
+if ( ! defined( 'PHOENIX_BUILD_URI' ) ) {
+	define( 'PHOENIX_BUILD_URI', untrailingslashit( get_template_directory_uri() ) . '/assets/build/' );
+}
+
+if ( ! defined( 'PHOENIX_IMG_URI' ) ) {
+	define( 'PHOENIX_IMG_URI', untrailingslashit( get_template_directory_uri() ) . '/assets/build/img/' );
+}
+if ( ! defined( 'PHOENIX_JS_URI' ) ) {
+	define( 'PHOENIX_JS_URI', untrailingslashit( get_template_directory_uri() ) . '/assets/build/js/' );
+}
+
+if ( ! defined( 'PHOENIX_JS_DIR_PATH' ) ) {
+	define( 'PHOENIX_JS_DIR_PATH', untrailingslashit( get_template_directory() ) . '/assets/build/js/' );
+}
+
+if ( ! defined( 'PHOENIX_CSS_URI' ) ) {
+	define( 'PHOENIX_CSS_URI', untrailingslashit( get_template_directory_uri() ) . '/assets/build/css/' );
+}
+
+if ( ! defined( 'PHOENIX_CSS_DIR' ) ) {
+	define( 'PHOENIX_CSS_DIR', untrailingslashit( get_template_directory() ) . '/assets/build/css/' );
+}
+
 // Include autoloader.
 require_once PHOENIX_DIR_PATH . '/inc/helpers/autoloader.php';
 require_once PHOENIX_DIR_PATH . '/inc/helpers/template-tags.php';

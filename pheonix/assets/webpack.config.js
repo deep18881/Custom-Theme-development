@@ -1,21 +1,34 @@
 const path = require('path');
-
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CssMinimizerPlugin = requirecd('css-minimizer-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const cssnano = require('cssnano'); // https://cssnano.co/
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const JS_DIR = path.resolve(__dirname, 'js');
 const IMG_DIR = path.resolve(__dirname, 'img');
-const BUID_DIR = path.reslove(__dirname, 'build');
+const BUILD_DIR = path.resolve(__dirname, 'build');
 
 const entry = {
-    main: JS_DIR + '/phoenix.js',
-
+    main: JS_DIR + '/main.js',
 };
 const output = {
-    path: BUID_DIR,
+    path: BUILD_DIR,
     filename: 'js/[name].js',
 };
+
+/**
+ * Note: argv.mode will return 'development' or 'production'.
+ */
+const plugins = (argv) => [
+    new CleanWebpackPlugin({
+        cleanStaleWebpackAssets: ('production' === argv.mode) // Automatically remove all unused webpack assets on rebuild, when set to true in production. ( https://www.npmjs.com/package/clean-webpack-plugin#options-and-defaults-optional )
+    }),
+
+    new MiniCssExtractPlugin({
+        filename: 'css/[name].css'
+    }),
+];
 
 const rules = [
     {
@@ -27,14 +40,17 @@ const rules = [
     {
         test: /\.scss$/,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+        ]
     },
     {
-        test: /\.(png|jpg|svg|gif|jpeg|webp|ico|)$/,
+        test: /\.(png|jpg|svg|gif|jpeg|webp|ico)$/,
         use: {
             loader: 'file-loader',
             options: {
-                name: '[name].[ext]',
+                name: '[path][name].[ext]',
                 publicPath: 'production' === process.env.NODE_ENV ? '../' : '../../',
             }
         }
@@ -42,18 +58,6 @@ const rules = [
 
 ];
 
-const plugins = (argv) => [
-    new CleanWebpackPlugin(
-        {
-            cleanStaleWebpackAssets: ('production' !== argv.mode),
-        }
-    ),
-    new MiniCssExtractPlugin(
-        {
-            filename: 'css/[name].css',
-        }
-    ),
-];
 
 module.exports = (env, argv) => ({
     entry: entry,
@@ -64,14 +68,14 @@ module.exports = (env, argv) => ({
     },
     optimization: {
         minimizer: [
-            new CssMinimizerPlugin(),
-            new UglifyJsPlugin(
-                {
-                    cache: false,
-                    parallel: true,
-                    sourceMap: false,
-                }
-            )
+            new OptimizeCssAssetsPlugin({
+                cssProcessor: cssnano
+            }),
+            new UglifyJsPlugin({
+                cache: false,
+                parallel: true,
+                sourceMap: false,
+            })
         ]
     },
     plugins: plugins(argv),
