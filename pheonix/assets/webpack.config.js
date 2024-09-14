@@ -11,6 +11,7 @@ const BUILD_DIR = path.resolve(__dirname, 'build');
 
 const entry = {
     main: JS_DIR + '/main.js',
+    editor: JS_DIR + '/editor.js',
 };
 const output = {
     path: BUILD_DIR,
@@ -43,6 +44,7 @@ const rules = [
         use: [
             MiniCssExtractPlugin.loader,
             'css-loader',
+            'sass-loader',
         ]
     },
     {
@@ -83,5 +85,4 @@ module.exports = (env, argv) => ({
         jquery: 'jQuery'
     }
 });
-
 

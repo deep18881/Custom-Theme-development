@@ -167,9 +167,11 @@ function pheonix_read_more() {
 		// Generate the "Read More" button.
 		$more = sprintf(
 			// The button HTML structure.
-			'<button class="read-more-button mt-4 btn btn-info">
-				<a class="phoenix-read-more text-white" href="%1$s">%2$s</a>
-			</button>',
+			'<a class="phoenix-read-more" href="%1$s">
+			<button class="read-more-button mt-4 btn btn-info text-white">
+				%2$s
+			</button>
+			</a>',
 			// The URL of the post.
 			esc_url( get_permalink( get_the_ID() ) ),
 			// The "Read More" text.

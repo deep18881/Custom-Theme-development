@@ -36,6 +36,9 @@ class Phoenix_Theme {
 		// Load sidebar class.
 		Sidebar::get_instance();
 
+		// Load Block pattern class.
+		Block_Pattern::get_instance();
+
 		// Setup hooks.
 		$this->setup_hooks();
 	}
@@ -136,9 +139,6 @@ class Phoenix_Theme {
 			)
 		);
 
-		// add editor style.
-		add_editor_style();
-
 		// Add support for block editor styles to display in front.
 		add_theme_support( 'wp-block-styles' );
 
@@ -150,7 +150,16 @@ class Phoenix_Theme {
 		if ( ! isset( $content_width ) ) {
 			$content_width = 1240;
 		}
+		/**
+		 * Add support for editor styles.
+		 *
+		 * @link https://wordpress.org/gutenberg/handbook/designers-developers/developers/themes/theme-support/#block-styles
+		 */
+		add_theme_support( 'editor-styles' );
+		// Add editor style.
+		add_editor_style( 'assets/build/css/editor.css' );
 	}
+
 
 	/**
 	 * Enqueue scripts and styles
@@ -159,9 +168,9 @@ class Phoenix_Theme {
 	 */
 	public function enqueue_scripts() {
 		// Add theme stylesheet.
-		// wp_register_script( 'phoenix-script', PHOENIX_JS_URI . 'main.js', array(), filemtime( PHOENIX_JS_DIR_PATH . 'main.js' ), true );
+		wp_register_script( 'phoenix-script', PHOENIX_JS_URI . 'main.js', array( 'jquery' ), filemtime( PHOENIX_JS_DIR_PATH . 'main.js' ), true );
 
-		wp_register_script( 'phoenix-script', PHOENIX_DIR_URI . '/assets/js/main.js', array( 'jquery' ), filemtime( PHOENIX_DIR_PATH . '/assets/js/main.js' ), true );
+		// wp_register_script( 'phoenix-script', PHOENIX_DIR_URI . '/assets/js/main.js', array( 'jquery' ), filemtime( PHOENIX_DIR_PATH . '/assets/js/main.js' ), true );
 
 		// register cdn for popper js.
 		wp_register_script( 'popper-js', 'https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js', array(), '2.11.8', true );
@@ -183,17 +192,15 @@ class Phoenix_Theme {
 	 * @return void
 	 */
 	public function enqueue_styles() {
-		// Add theme stylesheet.
-		wp_register_style( 'phoenix-style', get_stylesheet_uri(), array(), filemtime( PHOENIX_DIR_PATH . '/style.css' ), 'all' );
-		// enqueue theme stylesheet.
-		wp_enqueue_style( 'phoenix-style' );
-
 		// Add cdn for bootstrap 5.3.3 style.
 		wp_register_style( 'bootstrap-css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css', array(), '5.3.3', 'all' );
-		// enqueue cdn for bootstrap 5.3.3 style.
-		wp_enqueue_style( 'bootstrap-css' );
 
-		wp_register_style( 'font-css', PHOENIX_DIR_URI . 'library/fonts/fonts.css', array(), '1.0.0', 'all' );
+		// Add main style from build.
+		wp_register_style( 'main-css', PHOENIX_CSS_URI . 'main.css', array( 'bootstrap-css' ), filemtime( PHOENIX_CSS_DIR . 'main.css' ), 'all' );
+
+		// Enqueues all the styles.
+		wp_enqueue_style( 'bootstrap-css' );
+		wp_enqueue_style( 'main-css' );
 
 	}
 

@@ -16,9 +16,11 @@ if ( empty( $categories ) || ! is_array( $categories ) ) {
 <?php
 foreach ( $categories as $key => $category ) {
 	?>
-	<button class="btn btn-outline-secondary mb-2 mr-2">
-		<a class="text-black-50 entry-footer-link" 	href="<?php echo esc_url( get_term_link( $category ) ); ?>"><?php echo esc_html( $category->name ); ?></a>
-	</button>
+		<a class="text-black-50 entry-footer-link" 	href="<?php echo esc_url( get_term_link( $category ) ); ?>">
+		<button class="btn btn-outline-secondary mb-2 mr-2">
+		<?php echo esc_html( $category->name ); ?>
+		</button>
+	</a>
 	<?php
 }
 ?>

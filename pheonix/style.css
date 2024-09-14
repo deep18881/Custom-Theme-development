@@ -15,24 +15,3 @@ Text Domain: phoenix
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
-
-/* General styles */
-/* Make images responsive */
-img {
-  width: 100%;
-  height: auto;
-}
-/* Hide updated posts */
-.updated:not(.published) {
-  display: none;
-}
-
-/* Dropdown menu */
-.nav-item:hover .dropdown-menu {
-  display: block;
-}
-/* Page navigation */
-.page-numbers.current > span {
-  background-color: gray;
-  color: #fff;
-}
