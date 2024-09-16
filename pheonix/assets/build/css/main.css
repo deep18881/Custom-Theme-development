@@ -1020,6 +1020,16 @@ object {
 /*---------------------------
       Icons
 ---------------------------*/
+.home-page-wrap .entry-content > * {
+  margin: 40px 0 40px 0; }
+
+.home-page-wrap .entry-content > *:not(.alignfull):not(.wp-block-button) {
+  max-width: 1940px;
+  padding: 0 20px 0 20px; }
+
+.home-page-wrap .entry-content > .alignwide {
+  max-width: 2240px; }
+
 /* Entry meta */
 .updated:not(.published) {
   display: none; }

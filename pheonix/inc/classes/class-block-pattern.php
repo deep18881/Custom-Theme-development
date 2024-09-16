@@ -49,8 +49,8 @@ class Block_Pattern {
 	 */
 	public function register_block_pattern_category() {
 		$patterns_array = array(
-			'cover'        => esc_html( 'Cover', 'pheonix' ),
-			'testimonials' => esc_html( 'Testimonials', 'pheonix' ),
+			'cover'        => esc_html__( 'Cover', 'pheonix' ),
+			'testimonials' => esc_html__( 'Testimonials', 'pheonix' ),
 		);
 
 		if ( ! empty( $patterns_array ) && is_array( $patterns_array ) ) {

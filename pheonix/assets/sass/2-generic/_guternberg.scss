@@ -1,0 +1,14 @@
+.home-page-wrap {
+  .entry-content {
+    & > * {
+      margin: $site-margin-top 0 $site-margin-bottom 0;
+    }
+    & > *:not(.alignfull):not(.wp-block-button) {
+      max-width: $site-width;
+      padding: 0 $site-padding-right 0 $site-padding-left;
+    }
+    & > .alignwide {
+      max-width: $wide-width;
+    }
+  }
+}

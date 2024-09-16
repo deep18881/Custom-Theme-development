@@ -61,4 +61,3 @@ get_header();
 		}
 		// Get footer template.
 		get_footer();
-
