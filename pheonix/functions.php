@@ -18,6 +18,12 @@ if ( ! defined( 'PHOENIX_BUILD_URI' ) ) {
 	define( 'PHOENIX_BUILD_URI', untrailingslashit( get_template_directory_uri() ) . '/assets/build/' );
 }
 
+// Define build path.
+if ( ! defined( 'PHOENIX_BUILD_DIR_PATH' ) ) {
+	define( 'PHOENIX_BUILD_DIR_PATH', untrailingslashit( get_template_directory() ) . '/assets/build/' );
+}
+
+
 if ( ! defined( 'PHOENIX_IMG_URI' ) ) {
 	define( 'PHOENIX_IMG_URI', untrailingslashit( get_template_directory_uri() ) . '/assets/build/img/' );
 }
@@ -57,5 +63,3 @@ function create_instance() {
 }
 
 create_instance();
-
-

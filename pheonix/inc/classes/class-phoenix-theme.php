@@ -36,6 +36,9 @@ class Phoenix_Theme {
 		// Load sidebar class.
 		Sidebar::get_instance();
 
+		// Load Block categories class.
+		Block_Categories::get_instance();
+
 		// Load Block pattern class.
 		Block_Pattern::get_instance();
 
@@ -60,15 +63,6 @@ class Phoenix_Theme {
 		// Add any theme-specific actions here.
 		// add action after theme setup.
 		add_action( 'after_setup_theme', array( $this, 'theme_setup' ) );
-
-		// Add enquue styles.
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
-
-		// Add enqueue scripts action.
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-
-		// Add phoenix site add action.
-		add_action( 'pheonix_site_logo', array( $this, 'add_site_logo' ) );
 
 		/**
 		 * Filters
@@ -159,60 +153,4 @@ class Phoenix_Theme {
 		// Add editor style.
 		add_editor_style( 'assets/build/css/editor.css' );
 	}
-
-
-	/**
-	 * Enqueue scripts and styles
-	 *
-	 * @return void
-	 */
-	public function enqueue_scripts() {
-		// Add theme stylesheet.
-		wp_register_script( 'phoenix-script', PHOENIX_JS_URI . 'main.js', array( 'jquery' ), filemtime( PHOENIX_JS_DIR_PATH . 'main.js' ), true );
-
-		// wp_register_script( 'phoenix-script', PHOENIX_DIR_URI . '/assets/js/main.js', array( 'jquery' ), filemtime( PHOENIX_DIR_PATH . '/assets/js/main.js' ), true );
-
-		// register cdn for popper js.
-		wp_register_script( 'popper-js', 'https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js', array(), '2.11.8', true );
-		// enqueue cdn for popper js.
-		wp_enqueue_script( 'popper-js' );
-
-		// register cdn for bootstrap 5.3.3.
-		wp_register_script( 'bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js', array( 'jquery' ), '5.3.3', true );
-		// enqueue cdn for bootstrap 5.3.3.
-		wp_enqueue_script( 'bootstrap-js' );
-
-		// enqueue theme script.
-		wp_enqueue_script( 'phoenix-script' );
-	}
-
-	/**
-	 * Enqueue styles
-	 *
-	 * @return void
-	 */
-	public function enqueue_styles() {
-		// Add cdn for bootstrap 5.3.3 style.
-		wp_register_style( 'bootstrap-css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css', array(), '5.3.3', 'all' );
-
-		// Add main style from build.
-		wp_register_style( 'main-css', PHOENIX_CSS_URI . 'main.css', array( 'bootstrap-css' ), filemtime( PHOENIX_CSS_DIR . 'main.css' ), 'all' );
-
-		// Enqueues all the styles.
-		wp_enqueue_style( 'bootstrap-css' );
-		wp_enqueue_style( 'main-css' );
-
-	}
-
-	/**
-	 * Add site logo
-	 *
-	 * @return void
-	 */
-	public function add_site_logo() {
-		if ( function_exists( 'the_custom_logo' ) ) {
-			the_custom_logo();
-		}
-	}
-
 }
